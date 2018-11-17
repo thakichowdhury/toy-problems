@@ -1,4 +1,7 @@
-
 # Byproducts
 node_modules
 package-lock.json
+CtCI-6th-Edition-JavaScript
+
+# Garbage
+.DS_Store
