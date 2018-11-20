@@ -1,3 +1,5 @@
+const { createMatrix, isMatrix } = require('./util');
+
 describe('isUniqueChars', () => {
   const isUniqueChars = require('./isUniqueChars');
   it('should return false when string has duplicate chars', () => {
@@ -98,4 +100,72 @@ describe('stringCompression', () => {
   })
 });
 
+describe('rotateMatrix', () => {
+  const rotateMatrix = require('./rotateMatrix');
 
+  it(`should return an array`, () => {
+    expect(
+      Array.isArray(rotateMatrix(createMatrix(3)))
+    ).toBe(true);
+  })
+
+  it(`should return a NxN matrix`, () => {
+    expect( isMatrix(rotateMatrix(createMatrix(3))) )
+      .toBeTruthy();
+  })
+
+  it(`should return a matrix rotated from the input`, () => {
+    expect( rotateMatrix(createMatrix(3)) )
+      .toEqual( [[6, 3, 0], [7, 4, 1], [8, 5, 2]] )
+  })
+
+  // it(`should return the same matrix rotated in place`, () => {
+  //   expect()
+  // })
+});
+
+describe(`zeroMatrix`, () => {
+  const zeroMatrix = require('./zeroMatrix');
+
+  it(`should return an Array`, () => {
+    expect( Array.isArray(zeroMatrix(createMatrix(3))) )
+      .toBeTruthy();
+  })
+
+  it(`should return a matrix`, () => {
+    expect( isMatrix(zeroMatrix(createMatrix(3))) )
+      .toBeTruthy();
+  })
+
+  it(`should return a matrix with zeros for rows where there was a zero in the input matrix`, () => {
+    expect( zeroMatrix([[1, 2, 0, 4]]) )
+      .toEqual( [[0, 0, 0, 0]] );
+  })
+
+  it(`should return a matrix with zeros for the rows and columns where there was a zero in the input matrix`, () => {
+    expect( zeroMatrix([[1, 2, 0, 4], [5, 6, 7, 8]]) )
+      .toEqual( [[0, 0, 0, 0], [5, 6, 0, 8]] );
+  })
+})
+
+describe(`stringRotation`, () => {
+  const stringRotation = require('./stringRotation');
+  const str = 'waterbottle';
+  const str2 = 'erbottlewat';
+
+  it(`should return a boolean`, () => {
+    expect(typeof stringRotation(str, str2)).toBe('boolean');
+  })
+
+  it(`should return false when both strings are the same`, () => {
+    expect(stringRotation(str, 'waterbottle')).toBe(false);
+  })
+
+  it('should return false when a string is not a rotation of the other', () => {
+    expect(stringRotation(str, 'erbottlewzt')).toBe(false);
+  })
+
+  it('should return true when a string is a rotated version of the other', () => {
+    expect(stringRotation(str, str2)).toBeTruthy();
+  })
+})
